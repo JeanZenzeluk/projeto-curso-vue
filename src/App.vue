@@ -1,52 +1,34 @@
 <template>
     <v-app>
         <p>testee</p>
-        <v-row align="center">
-            <v-col class="text-center" cols="12" sm="4">
-            <div class="my-2">
-                <v-btn text small>Normal</v-btn>
-            </div>
-            <div class="my-2">
-                <v-btn text small color="primary">Primary</v-btn>
-            </div>
-            <div class="my-2">
-                <v-btn text small color="error">Error</v-btn>
-            </div>
-            <div class="my-2">
-                <v-btn text small disabled>Disabled</v-btn>
-            </div>
-            </v-col>
-
-            <v-col class="text-center" cols="12" sm="4">
-            <div class="my-2">
-                <v-btn text>Normal</v-btn>
-            </div>
-            <div class="my-2">
-                <v-btn text color="primary">Primary</v-btn>
-            </div>
-            <div class="my-2">
-                <v-btn text color="error">Error</v-btn>
-            </div>
-            <div class="my-2">
-                <v-btn text disabled>Disabled</v-btn>
-            </div>
-            </v-col>
-
-            <v-col class="text-center" cols="12" sm="4">
-            <div class="my-2">
-                <v-btn text large>Normal</v-btn>
-            </div>
-            <div class="my-2">
-                <v-btn text large color="primary">Primary</v-btn>
-            </div>
-            <div class="my-2">
-                <v-btn text large color="error">Error</v-btn>
-            </div>
-            <div class="my-2">
-                <v-btn text large disabled>Disabled</v-btn>
-            </div>
-            </v-col>
-        </v-row>
+         <v-container>
+    <v-row no-gutters>
+      <v-col cols="12" sm="4" md="3">
+        <v-card
+          class="pa-2 red"
+          outlined
+          tile>
+          One of three columns
+        </v-card>
+      </v-col>
+      <v-col cols="12" sm="4" md="3">
+        <v-card
+          class="pa-2 green"
+          outlined
+          tile>
+          One of three columns
+        </v-card>
+      </v-col>
+      <v-col cols="12" sm="4" md="1">
+        <v-card
+          class="pa-2 blue"
+          outlined
+          tile>
+          One of three columns
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
         <p>testeee 2</p>
     </v-app>
 </template>
