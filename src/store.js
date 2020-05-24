@@ -6,10 +6,26 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         authToken: '',
+        message: {
+            text: '',
+            type: '',
+        }
     },
     mutations: {
         setAlthToken(state, payload){
             state.authToken = payload;
         },
+        showErrorMessage(state, payload){
+            state.message = {
+                text: payload,
+                type: 'ERROR',
+            }
+        },
+        showSuccessMessage(state, payload){
+            state.message = {
+                text: payload,
+                type: 'SUCCESS',
+            }
+        }
     }
 });
