@@ -5,7 +5,7 @@
                 <v-col cols="12" md="3" class="text-center">
                     <h6 class="display-1 text-uppercase">Login</h6>
                     <v-text-field label="Token" v-model="token"/>
-                    <v-btn depressed dark color="green" block @click="login" class="mb-2">
+                    <v-btn depressed dark color="primary" block @click="login" class="mb-2">
                         Login
                     </v-btn>
                     <v-btn text @click="loginAsGuest" color="blue">
@@ -34,6 +34,7 @@
             login(){
                 if(this.token){
                     this.$store.commit('setAlthToken', this.token);
+                    this.$store.commit('setLogged', true);
                     this.$router.push('/book');
                     // alert(this.$store.state.authToken);
                 }else{
@@ -43,6 +44,7 @@
             }, 
             loginAsGuest(){
                 // TODO
+                this.$store.commit('setLogged', true);
                 this.$router.push('/book');
             }
         }

@@ -6,6 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         authToken: '',
+        logged: false,
         message: {
             text: '',
             type: '',
@@ -26,6 +27,9 @@ export default new Vuex.Store({
                 text: payload,
                 type: 'SUCCESS',
             }
+        },
+        setLogged(state, payload){
+            state.logged = payload;
         }
     }
 });
