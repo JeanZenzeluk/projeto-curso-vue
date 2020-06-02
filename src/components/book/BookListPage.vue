@@ -23,8 +23,8 @@
                 >
                     <v-list-item three-line>
                         <v-list-item-content>
-                            <v-list-item-title class="headline mb-1">{{book.title}}</v-list-item-title>
-                            <v-list-item-subtitle> {{book.desc}}</v-list-item-subtitle>
+                            <v-list-item-title class="headline mb-1">{{book.volumeInfo.title}}</v-list-item-title>
+                            <v-list-item-subtitle> {{book.volumeInfo.subtitle}}</v-list-item-subtitle>
                         </v-list-item-content>
                     </v-list-item>
                     <v-card-actions>
@@ -42,19 +42,19 @@
 </template>
 
 <script>
+    const axios = require('axios');
+
     export default {
         name: 'BookListPage',
         data(){
             return{
-                bookList: [
-                    { title: 'Livro 1', desc: 'Descricao qualquer'},
-                    { title: 'Livro 2', desc: 'Descricao qualquer'},
-                    { title: 'Livro 3', desc: 'Descricao qualquer'},
-                    { title: 'Livro 4', desc: 'Descricao qualquer'},
-                    { title: 'Livro 5', desc: 'Descricao qualquer'},
-                    { title: 'Livro 6', desc: 'Descricao qualquer'},
-                ]
+                bookList: []
             }
+        },
+        created(){
+            axios.get('https://www.googleapis.com/books/v1/volumes?q=flowers').then((response) =>{
+                this.bookList = response.data.items
+            });
         }
     };
 </script>
