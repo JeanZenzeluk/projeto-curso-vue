@@ -20,13 +20,12 @@
 </template>
 
 <script>
-    // AIzaSyC7oSfvfCBPvIKNfN5qflrA-28KQHaSgKQ
-
+    
     export default {
         name: 'loginPage',
         data() {
             return {
-                token: '',
+                token: 'AIzaSyC7oSfvfCBPvIKNfN5qflrA-28KQHaSgKQ',
                
             }
         },
