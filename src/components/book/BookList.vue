@@ -1,60 +1,84 @@
 <template>
-    <v-row>
-        <v-col cols="12">
-            <v-text-field 
-                v-model="textSearch"
-                label="Pesquise Algo.."
-                @change="doSearch"
-            />
-        </v-col>
-        <v-col
-            v-for="(book, i) in bookList"
-            :key="i"
-            colls="12"
-            md="3"
-            lg="2">
+    
+    <div>
+        <v-row>
+            <v-col cols="12">
+                <v-text-field 
+                    v-model="textSearch"
+                    label="Pesquise Algo.."
+                    @input="doSearch"
+                />
+            </v-col>
+        </v-row>
 
-            <v-card
-                class="mx-auto"
-                max-width="344"
-                outlined
-            >
-                <v-list-item three-line>
-                    <v-list-item-content>
-                        <v-list-item-title class="headline mb-1">{{book.volumeInfo.title}}</v-list-item-title>
-                        <v-list-item-subtitle> {{book.volumeInfo.subtitle}}</v-list-item-subtitle>
-                    </v-list-item-content>
-                </v-list-item>
-                <v-card-actions>
-                    <v-btn 
-                        text
-                        small
-                        color="primary">
-                        Ver Detalhes
-                    </v-btn>
-                </v-card-actions>
-            </v-card>
-        </v-col>
-    </v-row>
+        <v-row justify="center" v-if="!textSearch">
+            <v-col cols="12" md="4" class="text-center">
+                <p class="overline"> Digite algo para iniciar a pesquisa</p>
+            </v-col>
+        </v-row>
+
+        <loading :condition="searchOnGoing">
+            <v-row>
+                <v-col
+                    v-for="(book, i) in bookList"
+                    :key="i"
+                    colls="12"
+                    md="3"
+                    lg="2">
+
+                    <v-card
+                        class="mx-auto"
+                        max-width="344"
+                        outlined
+                    >
+                        <v-list-item three-line>
+                            <v-list-item-content>
+                                <v-list-item-title class="headline mb-1">{{book.volumeInfo.title}}</v-list-item-title>
+                                <v-list-item-subtitle> {{book.volumeInfo.subtitle}}</v-list-item-subtitle>
+                            </v-list-item-content>
+                        </v-list-item>
+                        <v-card-actions>
+                            <v-btn 
+                                text
+                                small
+                                color="primary">
+                                Ver Detalhes
+                            </v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-col>
+            </v-row>
+        </loading>
+    </div>
+    
 </template>
 
 <script>
+
+    import Loading from '../loading/Loading.vue';
+
     const axios = require('axios');
 
     export default {
         name: 'BookList',
+        components: { Loading },
         data(){
             return{
                 textSearch: '',
-                bookList: []
+                bookList: [],
+                searchOnGoing: false
             }
         },
         methods: {
             doSearch(){
                 if(this.textSearch){
+                    this.searchOnGoing = true;
                     axios.get(`https://www.googleapis.com/books/v1/volumes?q=${this.textSearch}`).then((response) =>{
-                        this.bookList = response.data.items
+                        this.bookList = response.data.items;
+                        this.searchOnGoing = false;
                     });
+                }else{
+                    this.bookList = [];
                 }
             }
         }
