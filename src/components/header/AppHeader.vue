@@ -5,7 +5,7 @@
             dense
             flat
             dark>
-            <v-toolbar-title>Page title</v-toolbar-title>
+            <v-toolbar-title>Projeto - Curso Vue</v-toolbar-title>
             <v-spacer />
             <v-toobal-itens v-if="$store.state.logged">
                 <v-btn 

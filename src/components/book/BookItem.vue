@@ -15,12 +15,15 @@
     </v-list-item>
     <v-card-actions>
       <v-btn text small color="primary" @click="goToDetais">Ver Detalhes</v-btn>
-      <v-btn text small color="primary" @click="goToPreview" v-if="book.volumeInfo.previewLink">Ver Preview</v-btn>
+      <v-btn text small color="primary" @click="goToPreview(book)" v-if="book.volumeInfo.previewLink">Ver Preview</v-btn>
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
+
+import bookService from './bookService';
+
 export default {
   name: "BookItem",
   created(){
@@ -30,10 +33,8 @@ export default {
       book: { type: Object, required: true},
   },
   methods: {
-      goToPreview(){
-          window.open(this.book.volumeInfo.previewLink, '_blank');
-      },
       goToDetais(){
+        this.$router.push(`/book/${this.book.id}`);
           // TODO levar nossa pagina (rota) que ira mostrar detalhes do livro
       }
   }
