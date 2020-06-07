@@ -24,28 +24,10 @@
                     :key="i"
                     colls="12"
                     md="3"
-                    lg="2">
+                    lg="3">
 
-                    <v-card
-                        class="mx-auto"
-                        max-width="344"
-                        outlined
-                    >
-                        <v-list-item three-line>
-                            <v-list-item-content>
-                                <v-list-item-title class="headline mb-1">{{book.volumeInfo.title}}</v-list-item-title>
-                                <v-list-item-subtitle> {{book.volumeInfo.subtitle}}</v-list-item-subtitle>
-                            </v-list-item-content>
-                        </v-list-item>
-                        <v-card-actions>
-                            <v-btn 
-                                text
-                                small
-                                color="primary">
-                                Ver Detalhes
-                            </v-btn>
-                        </v-card-actions>
-                    </v-card>
+                <book-item :book="book" />
+                   
                 </v-col>
             </v-row>
         </loading>
@@ -56,12 +38,13 @@
 <script>
 
     import Loading from '../loading/Loading.vue';
+    import BookItem from './BookItem.vue';
 
     const axios = require('axios');
 
     export default {
         name: 'BookList',
-        components: { Loading },
+        components: { Loading, BookItem},
         data(){
             return{
                 textSearch: '',

@@ -8,7 +8,10 @@
     </v-app>
 </template>
 
+
+
 <script>
+
     import AppHeader from './components/header/AppHeader.vue';
     import Feedback from './components/feedback/Feedback.vue';
 
