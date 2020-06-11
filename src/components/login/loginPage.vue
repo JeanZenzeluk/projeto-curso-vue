@@ -32,8 +32,7 @@
         methods: {
             login(){
                 if(this.token){
-                    this.$store.commit('setAlthToken', this.token);
-                    this.$store.commit('setLogged', true);
+                    this.$store.commit('setAuthToken', this.token);
                     this.$router.push('/book');
                     // alert(this.$store.state.authToken);
                 }else{

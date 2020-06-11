@@ -26,6 +26,7 @@ import bookService from './bookService';
 
 export default {
   name: "BookItem",
+  mixins: [bookService],
   created(){
       //console.log(this.book);
   },

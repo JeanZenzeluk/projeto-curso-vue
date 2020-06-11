@@ -13,8 +13,11 @@ export default new Vuex.Store({
         }
     },
     mutations: {
-        setAlthToken(state, payload){
+        setAuthToken(state, payload){
+            window.localStorage.authToken = payload,
             state.authToken = payload;
+            state.logged = Boolean(state.authToken);
+            console.log('state.logged: ' + state.logged);
         },
         showErrorMessage(state, payload){
             state.message = {
