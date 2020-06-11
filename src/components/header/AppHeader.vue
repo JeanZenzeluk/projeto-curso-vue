@@ -37,7 +37,7 @@
                 this.$router.push('/book');
             },
             goToCollection(){
-                this.$router.push('/collection'); // TODO rota nao exidte ainda
+                this.$router.push('/library'); // TODO rota nao exidte ainda
             },
             logout(){
                 this.$store.commit('setAuthToken', '');
