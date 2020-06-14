@@ -55,6 +55,8 @@
                     this.get(`/volumes?q=${textSearch}`).then((response) =>{
                         this.bookList = response.data.items;
                         this.searchOnGoing = false;
+                    }).catch(() => {
+                        this.searchOnGoing = false;
                     });
                 }else{
                     this.bookList = [];

@@ -15,6 +15,9 @@
             Número de Livros:
             <span class="font-weight-medium ml-1"> {{shelf.volumeCount }} </span>
         </span>
+         <v-card-actions>
+            <v-btn text small color="primary" @click="goToDetais">Ver Detalhes</v-btn>
+        </v-card-actions>
     </v-card-text>
     </div>
 </template>
@@ -25,6 +28,11 @@ export default {
   name: "LibraryItem",
   props: {
     shelf: { type: Object, required: true },
+  },
+  methods:  {
+    goToDetais(){
+        this.$router.push(`/library/$(this.shelf.id)`);
+    },
   }
 };
 </script>
