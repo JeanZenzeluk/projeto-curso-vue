@@ -6,8 +6,19 @@
                  <h4 class="display-1"> {{ shelf.title}}</h4>
                 <span class="overline ml-2">{{ shelf.volumeCount }} livros </span>
             </v-col>
-            <!-- TODO listar todos os livros da shelf -->
        </v-row>
+        <v-row>
+                <v-col
+                    v-for="(book, i) in bookList"
+                    :key="i"
+                    colls="12"
+                    md="3"
+                    lg="3">
+
+                <book-item :book="book" />
+                   
+                </v-col>
+            </v-row>
    </v-container>
 </template>
 
@@ -15,19 +26,24 @@
 
     import api from '../api/api';
     import BackButton from '../navigation/BackButton.vue';
+    import BookItem from '../book/BookItem.vue';
 
     export default {
         name: 'LibraryEntryPage',
-        components: { BackButton },
+        components: { BackButton, BookItem },
         mixins: [api],
         data(){
             return{
                 shelf: {},
+                bookList: [],
             }
         },
         created(){
             this.get(`/users/110471019258967698339/bookshelves/${this.$route.params.id}`).then((response) => {
                 this.shelf = response.data;
+            });
+            this.get(`/users/110471019258967698339/bookshelves/${this.$route.params.id}/volumes`).then((response) => {
+                this.shelf = response.data.items;
             });
         },
     };
