@@ -2,40 +2,15 @@
    <v-container fluid>
       <back-button />
        <v-row v-if="book && book.volumeInfo">
-           <v-col cols="12" md="3" v-if="book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail" class="text-center">
-             <img :src="book.volumeInfo.imageLinks.thumbnail"/>
+           <v-col cols="12" md="3" class="text-center">
+                <book-entry-image :book="book"/>
            </v-col>
+          
            <v-col cols="12" md="9">
-               <h4 class="display-1"> {{ book.volumeInfo.title}}</h4>
-               <h4 class="headline"> {{ book.volumeInfo.subtitle || 'Sem Descrição'}}</h4>
-
-               <p class="mt-2"> {{book.volumeInfo.description}} </p>
-
-               <div v-if="book.volumeInfo.authors && book.volumeInfo.authors.length">
-                   <v-subheader>Autores</v-subheader>
-                   <v-divider class="mb-2"/>
-                   <v-chip v-for="(author, i) in book.volumeInfo.authors" :key="i" pill class="mr-3">
-                       <v-avatar left color="primary">
-                           {{ author.substring(0, 1) }}
-                       </v-avatar>
-                       {{ author }}
-                   </v-chip>
-               </div>
-                <div class="mt-4" v-if="book.volumeInfo.categories && book.volumeInfo.categories.length">
-                   <v-subheader>Categorias</v-subheader>
-                   <v-divider class="mb-2"/>
-                   <v-chip v-for="(category, i) in book.volumeInfo.categories" :key="i" pill class="mr-3">
-                       {{ category }}
-                   </v-chip>
-               </div v-if="book.volumeInfo.previewLink">
-                <div class="mt-4">
-                   <v-subheader>Ações</v-subheader>
-                   <v-divider class="mb-2"/>
-                   <v-btn text color="primary" @click="goToPreview(book)">
-                       Ver Preview
-                   </v-btn>
-               </div>
-
+                <book-entry-data :book="book"/>
+                <book-entry-authors :book="book"/>
+                <book-entry-categories :book="book"/>
+                <book-entry-actions :book="book"/>
            </v-col>
        </v-row>
    </v-container>
@@ -43,16 +18,28 @@
 
 <script>
 
-    import bookService from './bookService';
     import api from '../api/api';
     import BackButton from '../navigation/BackButton.vue';
+
+    import BookEntryImage from './BookEntryImage.vue';
+    import BookEntryData from './BookEntryData.vue';
+    import BookEntryAuthors from './BookEntryAuthors.vue';
+    import BookEntryCategories from './BookEntryCategories.vue';
+    import BookEntryActions from './BookEntryActions.vue';
 
     const axios = require('axios');
 
     export default {
         name: 'BookEntryPage',
-        components: { BackButton },
-        mixins: [bookService, api],
+        components: { 
+            BackButton, 
+            BookEntryImage, 
+            BookEntryData, 
+            BookEntryAuthors, 
+            BookEntryCategories, 
+            BookEntryActions 
+        },
+        mixins: [api],
         data(){
             return{
                 book: {},
