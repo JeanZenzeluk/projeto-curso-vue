@@ -41,6 +41,7 @@
             },
             logout(){
                 this.$store.commit('setAuthToken', '');
+                this.$store.commit('setUserIdToken', '');
                 this.$router.push('/');
             }
         }
