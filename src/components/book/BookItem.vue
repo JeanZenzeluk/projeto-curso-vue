@@ -14,7 +14,7 @@
       </v-list-item-content>
     </v-list-item>
     <v-card-actions>
-      <v-btn text small color="primary" @click="goToDetais">Ver Detalhes</v-btn>
+      <forward-navigation-button :url="entryPageUrl" />
       <v-btn text small color="primary" @click="goToPreview(book)" v-if="book.volumeInfo.previewLink">Ver Preview</v-btn>
     </v-card-actions>
   </v-card>
@@ -23,21 +23,19 @@
 <script>
 
 import bookService from './bookService';
+import ForwardNavigationButton from '../navigation/ForwardNavigationButton.vue';
 
 export default {
   name: "BookItem",
+  components: { ForwardNavigationButton },
   mixins: [bookService],
-  created(){
-      //console.log(this.book);
-  },
-  props: {
+   props: {
       book: { type: Object, required: true},
   },
-  methods: {
-      goToDetais(){
-        this.$router.push(`/book/${this.book.id}`);
-          // TODO levar nossa pagina (rota) que ira mostrar detalhes do livro
-      }
+  computed: {
+    entryPageUrl(){
+      return `/book/${this.book.id}`;
+    },
   }
 };
 </script>

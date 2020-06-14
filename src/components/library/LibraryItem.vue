@@ -16,7 +16,7 @@
             <span class="font-weight-medium ml-1"> {{shelf.volumeCount }} </span>
         </span>
          <v-card-actions>
-            <v-btn text small color="primary" @click="goToDetais">Ver Detalhes</v-btn>
+            <forward-navigation-button :url="entryPageUrl" />
         </v-card-actions>
     </v-card-text>
     </div>
@@ -24,14 +24,17 @@
 
 <script>
 
+import ForwardNavigationButton from '../navigation/ForwardNavigationButton.vue';
+
 export default {
   name: "LibraryItem",
+  components: { ForwardNavigationButton },
   props: {
     shelf: { type: Object, required: true },
   },
-  methods:  {
-    goToDetais(){
-        this.$router.push(`/library/$(this.shelf.id)`);
+  computed: {
+    entryPageUrl(){
+      return `/book/${this.shelf.id}`;
     },
   }
 };

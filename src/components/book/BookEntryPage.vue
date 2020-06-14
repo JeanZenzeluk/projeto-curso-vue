@@ -1,12 +1,6 @@
 <template>
    <v-container fluid>
-       <v-row justify="end">
-           <v-col cols="12" md="2">
-               <v-btn text block @click="goBack">
-                   Voltar
-               </v-btn>
-           </v-col>
-       </v-row>
+      <back-button />
        <v-row v-if="book && book.volumeInfo">
            <v-col cols="12" md="3" v-if="book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail" class="text-center">
              <img :src="book.volumeInfo.imageLinks.thumbnail"/>
@@ -51,11 +45,13 @@
 
     import bookService from './bookService';
     import api from '../api/api';
+    import BackButton from '../navigation/BackButton.vue';
 
     const axios = require('axios');
 
     export default {
         name: 'BookEntryPage',
+        components: { BackButton },
         mixins: [bookService, api],
         data(){
             return{

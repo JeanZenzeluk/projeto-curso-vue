@@ -1,12 +1,6 @@
 <template>
    <v-container fluid>
-       <v-row justify="end">
-           <v-col cols="12" md="2">
-               <v-btn text block @click="goBack">
-                   Voltar
-               </v-btn>
-           </v-col>
-       </v-row>
+       <back-button />
        <v-row>
             <v-col cols="12">
                  <h4 class="display-1"> {{ shelf.title}}</h4>
@@ -20,9 +14,11 @@
 <script>
 
     import api from '../api/api';
+    import BackButton from '../navigation/BackButton.vue';
 
     export default {
         name: 'LibraryEntryPage',
+        components: { BackButton },
         mixins: [api],
         data(){
             return{
@@ -34,11 +30,6 @@
                 this.shelf = response.data;
             });
         },
-        methods:{
-            goBack(){
-                this.$router.push('/library');
-            },
-        }
     };
 </script>
 
